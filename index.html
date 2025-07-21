@@ -4,23 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>웹 호흡 코칭</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
     <h1>호흡 코칭</h1>
 
-    <div class="slider-container">
-        <label for="inhaleSlider">들이쉬기 시간: <span id="inhaleValue">4.0초</span></label>
-        <input type="range" id="inhaleSlider" min="1.0" max="10.0" step="0.1" value="4.0">
-    </div>
+    <div class="timers-container">
+        <div class="timer-box">
+            <div class="timer-label">들이쉬기</div>
+            <button class="arrow-btn" data-target="inhale" data-direction="up">▲</button>
+            <div class="time-display" id="inhaleValue">2</div>
+            <button class="arrow-btn" data-target="inhale" data-direction="down">▼</button>
+        </div>
 
-    <div class="slider-container">
-        <label for="exhaleSlider">내쉬기 시간: <span id="exhaleValue">6.0초</span></label>
-        <input type="range" id="exhaleSlider" min="1.0" max="10.0" step="0.1" value="6.0">
+        <div class="timer-box">
+            <div class="timer-label">숨참기</div>
+            <button class="arrow-btn" data-target="inhaleHold" data-direction="up">▲</button>
+            <div class="time-display" id="inhaleHoldValue">0</div>
+            <button class="arrow-btn" data-target="inhaleHold" data-direction="down">▼</button>
+        </div>
+
+        <div class="timer-box">
+            <div class="timer-label">내쉬기</div>
+            <button class="arrow-btn" data-target="exhale" data-direction="up">▲</button>
+            <div class="time-display" id="exhaleValue">2</div>
+            <button class="arrow-btn" data-target="exhale" data-direction="down">▼</button>
+        </div>
+
+        <div class="timer-box">
+            <div class="timer-label">숨참기</div>
+            <button class="arrow-btn" data-target="exhaleHold" data-direction="up">▲</button>
+            <div class="time-display" id="exhaleHoldValue">0</div>
+            <button class="arrow-btn" data-target="exhaleHold" data-direction="down">▼</button>
+        </div>
     </div>
 
     <button id="startButton">시작</button>
     <button id="stopButton" disabled>중지</button>
 
-    <p id="breathingText">시작 버튼을 눌러주세요</p>
-    <div id="animationDiv" class="circle"></div> <script src="script.js"></script> </body>
+    <p id="breathingText"></p> <div id="animationDiv" class="circle"></div> 
+    <script src="script.js"></script> 
+</body>
 </html>

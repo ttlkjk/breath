@@ -12,46 +12,70 @@ h1 {
     margin-bottom: 30px;
 }
 
-.slider-container {
-    margin: 20px auto;
-    width: 80%;
-    max-width: 500px;
+/* 새로운 타이머 박스들을 담는 컨테이너 */
+.timers-container {
+    display: flex; /* 자식 요소들을 가로로 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+    flex-wrap: wrap; /* 화면이 작아지면 다음 줄로 넘어감 */
+    gap: 20px; /* 각 타이머 박스 사이의 간격 */
+    margin-bottom: 30px;
+}
+
+/* 개별 타이머 박스 스타일 수정 */
+.timer-box {
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 10px; /* 패딩을 줄였습니다. */
     background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column; /* 자식 요소들을 세로로 정렬 */
+    align-items: center; /* 가운데 정렬 */
+    width: 110px; /* 박스 너비도 살짝 줄였습니다. */
+    height: 150px; /* 박스 높이를 줄였습니다. */
+    justify-content: space-between; /* 요소들 간의 공간 분배 */
 }
 
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1.1em;
+.timer-label {
+    font-size: 1.0em; /* 라벨 폰트 크기 살짝 줄임 */
     font-weight: bold;
+    color: #555;
+    margin-bottom: 3px; /* 여백 줄임 */
 }
 
-input[type="range"] {
-    width: 100%;
-    -webkit-appearance: none; /* 기본 스타일 제거 */
-    height: 10px;
+/* 위/아래 화살표 버튼 스타일 (비율에 맞게 추가 조정) */
+.arrow-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #007bff;
+    width: 50px; /* 버튼 너비를 더 줄였습니다. */
+    height: 25px; /* 버튼 높이를 더 줄였습니다. */
+    font-size: 1.0em; /* 화살표 크기를 더 줄였습니다. */
     cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-button {
+.arrow-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.arrow-btn:active {
+    background-color: #d0d0d0;
+}
+
+/* 시간 표시 숫자 스타일 수정 */
+.time-display {
+    font-size: 2.5em; /* 숫자 크기를 살짝 줄였습니다. */
+    font-weight: bold;
+    color: #333;
+    margin: 5px 0; /* 위아래 여백 줄임 */
+}
+
+/* 기존 시작/중지 버튼 스타일 (변경 없음) */
+button#startButton, button#stopButton {
     padding: 12px 25px;
     font-size: 1.2em;
     margin: 15px 10px;
@@ -64,11 +88,11 @@ button {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-button:hover {
+button#startButton:hover, button#stopButton:hover {
     background-color: #0056b3;
 }
 
-button:disabled {
+button#startButton:disabled, button#stopButton:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
 }
@@ -82,22 +106,21 @@ button:disabled {
 
 /* 애니메이션 원 스타일 수정 */
 .circle {
-    /* 원의 기본 크기를 200px로 키웠습니다. */
-    width: 200px;
-    height: 200px;
+    /* 원의 기본 크기를 280px로 키웠습니다. */
+    width: 280px;
+    height: 280px;
     background-color: #6c757d; /* 회색 */
     border-radius: 50%;
     margin: 50px auto;
-    /* transition 시간을 2초로 유지하여 부드럽게 크기가 변하도록 합니다. */
     transition: transform 2s ease-in-out, background-color 0.5s ease, opacity 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 2.5em; /* 원 안의 글씨 크기를 키웠습니다. */
+    font-size: 2.5em;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    
+
     /* 초기에는 보이지 않게 설정합니다. */
     opacity: 0;
     transform: scale(0);
