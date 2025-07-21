@@ -17,7 +17,7 @@ h1 {
     display: flex; /* 자식 요소들을 가로로 정렬 */
     justify-content: center; /* 가운데 정렬 */
     flex-wrap: wrap; /* 화면이 작아지면 다음 줄로 넘어감 */
-    gap: 20px; /* 각 타이머 박스 사이의 간격 */
+    gap: 10px; /* 각 타이머 박스 사이의 간격 줄임 */
     margin-bottom: 30px;
 }
 
@@ -25,22 +25,23 @@ h1 {
 .timer-box {
     border: 2px solid #ddd;
     border-radius: 12px;
-    padding: 10px; /* 패딩을 줄였습니다. */
+    padding: 8px; /* 패딩을 줄였습니다. */
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column; /* 자식 요소들을 세로로 정렬 */
     align-items: center; /* 가운데 정렬 */
-    width: 110px; /* 박스 너비도 살짝 줄였습니다. */
-    height: 150px; /* 박스 높이를 줄였습니다. */
+    width: 85px; /* 박스 너비 줄임 */
+    height: 150px; /* 박스 높이 유지 */
     justify-content: space-between; /* 요소들 간의 공간 분배 */
 }
 
 .timer-label {
-    font-size: 1.0em; /* 라벨 폰트 크기 살짝 줄임 */
+    font-size: 0.9em; /* 라벨 폰트 크기 살짝 더 줄임 */
     font-weight: bold;
     color: #555;
-    margin-bottom: 3px; /* 여백 줄임 */
+    margin-bottom: 2px; /* 여백 줄임 */
+    text-align: center; /* 라벨 가운데 정렬 */
 }
 
 /* 위/아래 화살표 버튼 스타일 (비율에 맞게 추가 조정) */
@@ -48,9 +49,9 @@ h1 {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 50px; /* 버튼 너비를 더 줄였습니다. */
-    height: 25px; /* 버튼 높이를 더 줄였습니다. */
-    font-size: 1.0em; /* 화살표 크기를 더 줄였습니다. */
+    width: 40px; /* 버튼 너비 더 줄임 */
+    height: 20px; /* 버튼 높이 더 줄임 */
+    font-size: 0.9em; /* 화살표 크기 더 줄임 */
     cursor: pointer;
     transition: background-color 0.2s;
     display: flex;
@@ -68,10 +69,10 @@ h1 {
 
 /* 시간 표시 숫자 스타일 수정 */
 .time-display {
-    font-size: 2.5em; /* 숫자 크기를 살짝 줄였습니다. */
+    font-size: 2em; /* 숫자 크기 줄임 */
     font-weight: bold;
     color: #333;
-    margin: 5px 0; /* 위아래 여백 줄임 */
+    margin: 3px 0; /* 위아래 여백 줄임 */
 }
 
 /* 기존 시작/중지 버튼 스타일 (변경 없음) */
@@ -104,9 +105,8 @@ button#startButton:disabled, button#stopButton:disabled {
     color: #28a745; /* 초록색 */
 }
 
-/* 애니메이션 원 스타일 수정 */
+/* 애니메이션 원 스타일 */
 .circle {
-    /* 원의 기본 크기를 280px로 키웠습니다. */
     width: 280px;
     height: 280px;
     background-color: #6c757d; /* 회색 */
