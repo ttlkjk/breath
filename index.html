@@ -3,46 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웹 호흡 코칭</title>
+    <title>호흡 코칭 앱</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>호흡 코칭</h1>
+    <h1>호흡 코칭 앱</h1>
 
     <div class="timers-container">
         <div class="timer-box">
+            <button class="arrow-btn" onclick="changeTime('inhale', 1)">▲</button>
             <div class="timer-label">들이쉬기</div>
-            <button class="arrow-btn" data-target="inhale" data-direction="up">▲</button>
-            <div class="time-display" id="inhaleValue">2</div>
-            <button class="arrow-btn" data-target="inhale" data-direction="down">▼</button>
+            <div id="inhaleTime" class="time-display">4</div>
+            <button class="arrow-btn" onclick="changeTime('inhale', -1)">▼</button>
         </div>
 
         <div class="timer-box">
-            <div class="timer-label">숨참기</div>
-            <button class="arrow-btn" data-target="inhaleHold" data-direction="up">▲</button>
-            <div class="time-display" id="inhaleHoldValue">0</div>
-            <button class="arrow-btn" data-target="inhaleHold" data-direction="down">▼</button>
+            <button class="arrow-btn" onclick="changeTime('hold', 1)">▲</button>
+            <div class="timer-label">참기</div>
+            <div id="holdTime" class="time-display">4</div>
+            <button class="arrow-btn" onclick="changeTime('hold', -1)">▼</button>
         </div>
 
         <div class="timer-box">
+            <button class="arrow-btn" onclick="changeTime('exhale', 1)">▲</button>
             <div class="timer-label">내쉬기</div>
-            <button class="arrow-btn" data-target="exhale" data-direction="up">▲</button>
-            <div class="time-display" id="exhaleValue">2</div>
-            <button class="arrow-btn" data-target="exhale" data-direction="down">▼</button>
+            <div id="exhaleTime" class="time-display">6</div>
+            <button class="arrow-btn" onclick="changeTime('exhale', -1)">▼</button>
         </div>
 
         <div class="timer-box">
-            <div class="timer-label">숨참기</div>
-            <button class="arrow-btn" data-target="exhaleHold" data-direction="up">▲</button>
-            <div class="time-display" id="exhaleHoldValue">0</div>
-            <button class="arrow-btn" data-target="exhaleHold" data-direction="down">▼</button>
+            <button class="arrow-btn" onclick="changeTime('prepare', 1)">▲</button>
+            <div class="timer-label">준비</div>
+            <div id="prepareTime" class="time-display">2</div>
+            <button class="arrow-btn" onclick="changeTime('prepare', -1)">▼</button>
         </div>
     </div>
 
-    <button id="startButton">시작</button>
-    <button id="stopButton" disabled>중지</button>
+    <div style="margin-bottom: 20px;">
+        <label for="totalCycles" style="font-size: 1.1em; font-weight: bold; color: #555;">총 주기:</label>
+        <input type="number" id="totalCycles" value="0" min="0" style="width: 60px; padding: 5px; font-size: 1.1em; text-align: center; border: 1px solid #ccc; border-radius: 5px;">
+        <span style="font-size: 0.9em; color: #777;"> (0 입력 시 무한 반복)</span>
+    </div>
 
-    <p id="breathingText"></p> <div id="animationDiv" class="circle"></div> 
-    <script src="script.js"></script> 
+    <div>
+        <button id="startButton">시작</button>
+        <button id="stopButton" disabled>중지</button>
+    </div>
+
+    <div id="breathingText">시작하려면 버튼을 누르세요</div>
+
+    <div id="circle" class="circle"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
