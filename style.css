@@ -109,8 +109,8 @@ button#startButton:disabled, button#stopButton:disabled {
 
 /* 애니메이션 원 스타일 수정 */
 .circle {
-    width: 200px; /* 원 크기 다시 키움 */
-    height: 200px; /* 원 크기 다시 키움 */
+    width: 260px; /* 원 크기 다시 키움 */
+    height: 260px; /* 원 크기 다시 키움 */
     background-color: #6c757d;
     border-radius: 50%;
     margin: 40px auto; /* margin 조정 */
@@ -119,7 +119,7 @@ button#startButton:disabled, button#stopButton:disabled {
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 2.2em; /* 원 안 글씨 크기 키움 */
+    font-size: 2.4em; /* 원 안 글씨 크기 키움 */
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     opacity: 0;

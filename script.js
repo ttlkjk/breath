@@ -10,7 +10,7 @@ let currentPhase = 0; // 0: 준비, 1: 들이쉬기, 2: 참기, 3: 내쉬기
 let remainingTime = 0;
 let intervalId;
 let isRunning = false;
-let totalCycles = 0;
+// let totalCycles = 0; // 이 줄이 삭제되었는지 다시 확인합니다.
 let completedCycles = 0;
 
 // DOM 요소 가져오기
@@ -74,7 +74,7 @@ startButton.addEventListener('click', () => {
     startButton.disabled = true;
     stopButton.disabled = false;
     completedCycles = 0; // 주기 초기화
-    totalCycles = document.getElementById('totalCycles').value; // 입력된 총 주기 가져오기
+    // totalCycles = document.getElementById('totalCycles').value; // 이 줄이 삭제되었는지 다시 확인합니다.
 
     // 모든 타이머 박스 및 버튼 비활성화
     document.querySelectorAll('.timer-box button').forEach(btn => btn.disabled = true);
@@ -94,13 +94,13 @@ function startBreathingCycle() {
     if (!isRunning) return;
 
     completedCycles++;
-    if (totalCycles > 0 && completedCycles > totalCycles) {
-        stopBreathing();
-        breathingText.textContent = "완료!";
-        return;
-    }
+    // if (totalCycles > 0 && completedCycles > totalCycles) { // 이 if 문이 삭제되었는지 다시 확인합니다.
+    //     stopBreathing();
+    //     breathingText.textContent = "완료!";
+    //     return;
+    // }
 
-    breathingText.textContent = `주기 ${completedCycles}/${totalCycles > 0 ? totalCycles : '∞'}`;
+    breathingText.textContent = `주기 ${completedCycles}`; // 텍스트를 `주기 ${completedCycles}`로 변경합니다.
     currentPhase = 0; // 준비 단계부터 시작
     runPhase();
 }
@@ -156,13 +156,12 @@ function runPhase() {
     clearInterval(intervalId);
     // phaseDuration이 0초일 경우, 즉시 다음 단계로 넘어가도록 처리
     if (phaseDuration === 0) {
-        if (remainingTime <= 0) { // 혹시 모를 경우를 대비
-            currentPhase++;
-            if (currentPhase > 3) {
-                startBreathingCycle();
-            } else {
-                runPhase();
-            }
+        // 남은 시간이 0초일 경우 즉시 다음 단계로 진행 (setTimeout 대신 직접 호출)
+        currentPhase++;
+        if (currentPhase > 3) {
+            startBreathingCycle();
+        } else {
+            runPhase();
         }
     } else {
         intervalId = setInterval(() => {
@@ -195,7 +194,7 @@ function updateBreathingDisplay(text, time, color, scale) {
 function stopBreathing() {
     isRunning = false;
     clearInterval(intervalId);
-    breathingText.textContent = "시작하려면 버튼을 누르세요";
+    breathingText.textContent = ""; // 이 부분을 빈 문자열로 변경합니다.
     circle.classList.remove('show'); // 원 숨기기
     startButton.disabled = false;
     stopButton.disabled = true;
