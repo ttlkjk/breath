@@ -179,4 +179,28 @@ function runPhase() {
                     runPhase(); // 다음 단계 실행
                 }
             }
-        }, 1000); //
+        }, 1000); // 1초마다 업데이트
+    }
+}
+
+// 호흡 텍스트 및 원 업데이트
+function updateBreathingDisplay(text, time, color, scale) {
+    breathingText.textContent = `${text} (${time}초)`;
+    circle.style.backgroundColor = color;
+    circle.style.transform = `scale(${scale})`; // 원 크기 변경 애니메이션
+    circle.textContent = time; // 원 안에 남은 시간 표시
+}
+
+// 호흡 중지
+function stopBreathing() {
+    isRunning = false;
+    clearInterval(intervalId);
+    breathingText.textContent = "시작하려면 버튼을 누르세요";
+    circle.classList.remove('show'); // 원 숨기기
+    startButton.disabled = false;
+    stopButton.disabled = true;
+
+    // 모든 타이머 박스 및 버튼 활성화
+    document.querySelectorAll('.timer-box button').forEach(btn => btn.disabled = false);
+    document.querySelectorAll('.timer-box .time-display').forEach(display => display.style.pointerEvents = 'auto');
+}
