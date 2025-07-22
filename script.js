@@ -1,10 +1,10 @@
 ﻿// script.js
 
 // 타이머 설정 초기값
-let inhaleTime = 4;
-let holdTime = 4;
-let exhaleTime = 6;
-let prepareTime = 2; // 준비 시간 (숨 고르기)
+let inhaleTime = 2;   // 들이쉬기 시간 2초로 변경
+let holdTime = 0;     // 참기 시간 0초로 변경
+let exhaleTime = 2;   // 내쉬기 시간 2초로 변경
+let prepareTime = 0;  // 준비 시간 0초로 변경
 
 let currentPhase = 0; // 0: 준비, 1: 들이쉬기, 2: 참기, 3: 내쉬기
 let remainingTime = 0;
@@ -154,41 +154,29 @@ function runPhase() {
     }
 
     clearInterval(intervalId);
-    intervalId = setInterval(() => {
-        remainingTime--;
-        updateBreathingDisplay(phaseText, remainingTime, color, scale);
-
-        if (remainingTime <= 0) {
-            clearInterval(intervalId);
+    // phaseDuration이 0초일 경우, 즉시 다음 단계로 넘어가도록 처리
+    if (phaseDuration === 0) {
+        if (remainingTime <= 0) { // 혹시 모를 경우를 대비
             currentPhase++;
             if (currentPhase > 3) {
-                // 한 주기 완료
-                startBreathingCycle(); // 다음 주기 시작
+                startBreathingCycle();
             } else {
-                runPhase(); // 다음 단계 실행
+                runPhase();
             }
         }
-    }, 1000); // 1초마다 업데이트
-}
+    } else {
+        intervalId = setInterval(() => {
+            remainingTime--;
+            updateBreathingDisplay(phaseText, remainingTime, color, scale);
 
-// 호흡 텍스트 및 원 업데이트
-function updateBreathingDisplay(text, time, color, scale) {
-    breathingText.textContent = `${text} (${time}초)`;
-    circle.style.backgroundColor = color;
-    circle.style.transform = `scale(${scale})`; // 원 크기 변경 애니메이션
-    circle.textContent = time; // 원 안에 남은 시간 표시
-}
-
-// 호흡 중지
-function stopBreathing() {
-    isRunning = false;
-    clearInterval(intervalId);
-    breathingText.textContent = "시작하려면 버튼을 누르세요";
-    circle.classList.remove('show'); // 원 숨기기
-    startButton.disabled = false;
-    stopButton.disabled = true;
-
-    // 모든 타이머 박스 및 버튼 활성화
-    document.querySelectorAll('.timer-box button').forEach(btn => btn.disabled = false);
-    document.querySelectorAll('.timer-box .time-display').forEach(display => display.style.pointerEvents = 'auto');
-}
+            if (remainingTime <= 0) {
+                clearInterval(intervalId);
+                currentPhase++;
+                if (currentPhase > 3) {
+                    // 한 주기 완료
+                    startBreathingCycle(); // 다음 주기 시작
+                } else {
+                    runPhase(); // 다음 단계 실행
+                }
+            }
+        }, 1000); //
