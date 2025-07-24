@@ -2,15 +2,15 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
-    margin-top: 50px; /* body margin top 원래대로 */
+    margin-top: 50px;
     background-color: #f0f2f5;
     color: #333;
 }
 
 h1 {
     color: #0056b3;
-    margin-bottom: 30px; /* h1 margin bottom 원래대로 */
-    font-size: 2.2em; /* h1 font size 살짝 키움 */
+    margin-bottom: 30px;
+    font-size: 2.2em;
 }
 
 /* 새로운 타이머 박스들을 담는 컨테이너 */
@@ -18,41 +18,41 @@ h1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 8px; /* gap 조정 */
-    margin-bottom: 25px; /* timers-container margin bottom 조정 */
+    gap: 8px;
+    margin-bottom: 25px;
 }
 
 /* 개별 타이머 박스 스타일 수정 */
 .timer-box {
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 5px; /* padding 조정 */
+    padding: 5px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* 그림자 조정 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 65px; /* 박스 너비 살짝 키움 */
-    height: 125px; /* 박스 높이 살짝 키움 */
+    width: 65px;
+    height: 125px;
     justify-content: space-between;
 }
 
 .timer-label {
     font-size: 0.8em;
     font-weight: bold;
-    color: #666; /* 색상 조정 */
+    color: #666;
     margin-bottom: 2px;
     text-align: center;
 }
 
-/* 위/아래 화살표 버튼 스타일 (비율에 맞게 추가 조정) */
+/* 위/아래 화살표 버튼 스타일 */
 .arrow-btn {
-    background-color: #e8e8e8; /* 배경색 조정 */
-    border: 1px solid #bbb; /* 테두리 조정 */
+    background-color: #e8e8e8;
+    border: 1px solid #bbb;
     border-radius: 4px;
-    width: 30px; /* 버튼 너비 조정 */
-    height: 16px; /* 버튼 높이 조정 */
-    font-size: 0.75em; /* 화살표 크기 조정 */
+    width: 30px;
+    height: 16px;
+    font-size: 0.75em;
     cursor: pointer;
     transition: background-color 0.2s;
     display: flex;
@@ -71,18 +71,18 @@ h1 {
 
 /* 시간 표시 숫자 스타일 수정 */
 .time-display {
-    font-size: 1.6em; /* 숫자 크기 조정 */
+    font-size: 1.6em;
     font-weight: bold;
-    color: #444; /* 색상 조정 */
+    color: #444;
     margin: 2px 0;
 }
 
 /* 기존 시작/중지 버튼 스타일 */
 button#startButton, button#stopButton {
-    padding: 10px 20px; /* 버튼 패딩 조정 */
-    font-size: 1.1em; /* 버튼 폰트 크기 조정 */
-    margin: 15px 8px; /* 버튼 마진 조정 */
-    border-radius: 22px; /* 둥글기 조정 */
+    padding: 10px 20px;
+    font-size: 1.1em;
+    margin: 15px 8px;
+    border-radius: 22px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -101,33 +101,83 @@ button#startButton:disabled, button#stopButton:disabled {
 }
 
 #breathingText {
-    font-size: 2.5em; /* breathingText 폰트 크기 조정 */
+    font-size: 2.5em;
     font-weight: bold;
-    margin-top: 30px; /* breathingText margin top 조정 */
+    margin-top: 30px;
     color: #28a745;
 }
 
-/* 애니메이션 원 스타일 수정 */
+/* 원들을 담을 컨테이너 */
+.circle-container {
+    position: relative; /* 자식 요소의 absolute 위치 기준 */
+    /* 원의 최대 스케일 1.2를 고려하여 기준 크기 설정 (260px * 1.2 = 312px) */
+    width: 312px;
+    height: 312px;
+    margin: 40px auto; /* 중앙 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 내부 요소를 중앙에 배치 (주요 circle도 중앙에 위치) */
+}
+
+/* 애니메이션 원 스타일 (실제 움직이는 원) */
 .circle {
-    width: 260px; /* 원 크기 다시 키움 */
-    height: 260px; /* 원 크기 다시 키움 */
+    width: 260px; /* 원 크기 설정 */
+    height: 260px; /* 원 크기 설정 */
     background-color: #6c757d;
     border-radius: 50%;
-    margin: 40px auto; /* margin 조정 */
-    transition: transform 2s ease-in-out, background-color 0.5s ease, opacity 0.5s ease;
+    /* transform은 js에서 개별적으로 제어하므로 transition에서 transform은 제외 */
+    transition: background-color 0.5s ease, opacity 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 2.4em; /* 원 안 글씨 크기 키움 */
+    font-size: 2.4em;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     opacity: 0;
-    transform: scale(0);
+
+    position: absolute; /* .circle-container 내에서 절대 위치 */
+    top: 50%;
+    left: 50%;
+    /* 초기에는 중앙에 배치만 하고, 스케일은 .show 클래스 또는 JS에서 제어 */
+    transform: translate(-50%, -50%);
 }
 
 /* 원이 나타날 때 적용할 클래스 */
 .circle.show {
     opacity: 1;
-    transform: scale(1);
+    /* 초기 스케일 설정. 이후에는 JS에서 변경될 것임 */
+    /* transform은 JS에서 제어하므로, 여기에 초기 scale을 명시하지 않습니다.
+       애니메이션의 시작을 부드럽게 하기 위해 초기 스케일은 0이 아닌 0.6으로 시작. */
+    transform: translate(-50%, -50%) scale(0.6);
+    transition: transform 2s ease-in-out, background-color 0.5s ease, opacity 0.5s ease; /* transform transition 추가 */
+}
+
+
+/* 최대 크기 원의 테두리 */
+.max-circle-outline {
+    position: absolute;
+    width: 312px; /* 260px * 1.2 (max scale) */
+    height: 312px; /* 260px * 1.2 (max scale) */
+    border: 2px dashed #a0a0a0; /* 회색 점선 */
+    border-radius: 50%;
+    z-index: 1; /* circle보다 아래에 위치 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
+    box-sizing: border-box; /* 패딩, 보더가 너비/높이에 포함되도록 */
+}
+
+/* 최소 크기 원의 테두리 */
+.min-circle-outline {
+    position: absolute;
+    width: 156px; /* 260px * 0.6 (min scale) */
+    height: 156px; /* 260px * 0.6 (min scale) */
+    border: 2px dashed #a0a0a0; /* 회색 점선 */
+    border-radius: 50%;
+    z-index: 1; /* circle보다 아래에 위치 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
+    box-sizing: border-box;
 }
